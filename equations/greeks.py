@@ -56,10 +56,6 @@ def rhod_put(S, K, T, r, sigma, q=0.0):
     return S * T * np.exp(-q * T) * norm.cdf(-D1)
 
 
-# ═══════════════════════════════════════════════════════════════════════════
-#  BINARY (DIGITAL) OPTIONS
-# ═══════════════════════════════════════════════════════════════════════════
-
 def binary_delta_call(S, K, T, r, sigma, q=0.0):
     D2 = d2(S, K, T, r, sigma, q)
     return np.exp(-r * T) * norm.pdf(D2) / (S * sigma * np.sqrt(T))

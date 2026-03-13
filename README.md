@@ -4,7 +4,7 @@ A Python recreation of the Black Scholes and Greeks spreadsheet from
 *Paul Wilmott Introduces Quantitative Finance* (2nd ed.).
 
 
-1. **Contents** — Title and navigation
+1. **Contents** — Black Scholes Greek Coded Simulation
 2. **Spreadsheet functions / VB functions** — Reference for Excel vs VB function syntax
 3. **Greeks** — Black-Scholes pricing and all Greeks for:
    - Vanilla European Call & Put (Value, Delta, Gamma, Theta, Speed, Vega, Rho, Rho D)
@@ -15,17 +15,16 @@ A Python recreation of the Black Scholes and Greeks spreadsheet from
 
 ## Novel Contribution
 
-This project extends the spreadsheet by:
 1. Fetching **real options data** via `yfinance` for any ticker
 2. Computing **implied volatilities** across strikes and plotting the **volatility smile**
 3. Visualizing all Greeks as functions of strike and spot price
-4. Providing an **interactive Streamlit dashboard** for exploration
+4. Providing an **Streamlit dashboard** for simulation of different parameters
 
 ## Project Structure
 
 ```
-bs_greeks_project/
-├── core/
+wilmott-project/
+├── equations/
 │   ├── black_scholes.py      # BS vanilla + binary pricing (with div yield)
 │   ├── greeks.py              # all the greeks
 │   └── implied_vol.py         # Newton-Raphson IV solver
@@ -46,12 +45,17 @@ bs_greeks_project/
 ## Setup & Usage
 
 ```bash
+# create virtual environment
+python -m venv venv
+source venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
 
-# CLI pipeline (generates plots + CSVs)
+# CLI pipeline
 python main.py --ticker AAPL
 
-# Theoretical plots only (no internet needed)
+# Theoretical plots only
 python main.py --skip-live
 
 # Interactive dashboard
@@ -59,8 +63,12 @@ streamlit run dashboard.py
 ```
 
 ## online demo
+[Dashboard](https://black-scholes-greek-dashboard.streamlit.app/)
 
 
 ## Citations
 
-- Streamlit Dashboard was generated using the Claude AI
+- Model, implementation, and interpretation was done by @mdalmamun
+- Streamlit Dashboard was completed by @mdalmamun with assistance from Claude AI
+- Project Structure and debugging was done by @mdalmamun with assistance from ChatGPT
+- Equation references are from the book *Paul Wilmott Introduces Quantitative Finance* (2nd ed.)

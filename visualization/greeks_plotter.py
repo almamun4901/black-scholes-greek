@@ -7,13 +7,28 @@ def plot_greeks_vs_strike(S, K_range, T, r, sigma, q=0.0, option_type="call", sa
     K = np.asarray(K_range, dtype=float)
     is_call = option_type.lower() == "call"
 
-    deltas = delta_call(S, K, T, r, sigma, q) if is_call else delta_put(S, K, T, r, sigma, q)
+    # Greeks
+    if is_call:
+        deltas = delta_call(S, K, T, r, sigma, q)
+    else:
+        deltas = delta_put(S, K, T, r, sigma, q)
     gammas = gamma(S, K, T, r, sigma, q)
+
     vegas = vega(S, K, T, r, sigma, q)
-    thetas = (theta_call(S, K, T, r, sigma, q) if is_call else theta_put(S, K, T, r, sigma, q)) / 365
-    rhos = rho_call(S, K, T, r, sigma, q) if is_call else rho_put(S, K, T, r, sigma, q)
+
+    if is_call:
+        thetas = theta_call(S, K, T, r, sigma, q) / 365
+    else:
+        thetas = theta_put(S, K, T, r, sigma, q) / 365
+
+    if is_call:
+        rhos = rho_call(S, K, T, r, sigma, q)
+    else:
+        rhos = rho_put(S, K, T, r, sigma, q)
+
     speeds = speed(S, K, T, r, sigma, q)
 
+    # Plot
     fig, axes = plt.subplots(2, 3, figsize=(16, 9))
     fig.suptitle(
         f"Black-Scholes Greeks vs Strike  |  S={S}, T={T:.2f}y, "
