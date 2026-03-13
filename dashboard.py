@@ -9,9 +9,9 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 
-from core.black_scholes import call_price, put_price, binary_call_price, binary_put_price
-from core.greeks import all_vanilla_greeks, all_binary_greeks
-from core.implied_vol import implied_vol
+from equations.black_scholes import call_price, put_price, binary_call_price, binary_put_price
+from equations.greeks import all_vanilla_greeks, all_binary_greeks
+from equations.implied_vol import implied_vol
 from visualization.greeks_plotter import plot_greeks_vs_strike, plot_greeks_vs_spot
 
 st.set_page_config(page_title="BS Greeks Dashboard", layout="wide")
@@ -27,8 +27,8 @@ r = st.sidebar.slider("Interest Rate (r)", 0.0, 0.15, 0.05, 0.005, format="%.3f"
 q = st.sidebar.slider("Dividend Yield (q)", 0.0, 0.10, 0.0, 0.005, format="%.3f")
 
 tab1, tab2, tab3, tab4 = st.tabs([
-    "\U0001f4ca Greeks (Wilmott Sheet)", "\U0001f4c8 Greeks Plots",
-    "\U0001f50d Implied Volatility", "\U0001f4e1 Live Data"
+    "Greeks (Wilmott Sheet)", "Greeks Plots",
+    "Implied Volatility", "Live Data"
 ])
 
 # Tab 1: Greeks
@@ -84,7 +84,7 @@ with tab2:
 # Tab 3: IV 
 with tab3:
     st.subheader("Implied Volatility Solver")
-    st.write("Enter market call prices to back out implied volatility (Wilmott Sheet 3)")
+    st.write("Enter market call prices to back out implied volatility")
 
     iv_r = st.number_input("Interest rate for IV", value=0.08, step=0.01, format="%.3f")
     iv_tol = st.number_input("Error tolerance", value=0.001, step=0.0001, format="%.4f")
@@ -123,7 +123,7 @@ with tab3:
 
 # Tab 4: Live data
 with tab4:
-    st.subheader("Fetch Real Options Data (Novel Contribution)")
+    st.subheader("Fetch Real Options Data")
     ticker = st.text_input("Ticker", value="SPY")
     if st.button("Fetch & Analyze"):
         with st.spinner("Fetching..."):

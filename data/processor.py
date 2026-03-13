@@ -1,9 +1,9 @@
 
 import numpy as np
 import pandas as pd
-from core.black_scholes import call_price_vec, put_price_vec
-from core.greeks import all_vanilla_greeks
-from core.implied_vol import implied_vol
+from equations.black_scholes import call_price_vec, put_price_vec
+from equations.greeks import all_vanilla_greeks
+from equations.implied_vol import implied_vol
 
 
 def clean_chain(df, spot, option_type="call"):

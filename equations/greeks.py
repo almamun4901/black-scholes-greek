@@ -1,7 +1,7 @@
 # option greeks
 import numpy as np
 from scipy.stats import norm
-from core.black_scholes import d1, d2
+from equations.black_scholes import d1, d2
 
 
 def delta_call(S, K, T, r, sigma, q=0.0):
@@ -127,7 +127,7 @@ def binary_rhod_put(S, K, T, r, sigma, q=0.0):
 
 def all_vanilla_greeks(S, K, T, r, sigma, q=0.0, option_type="call"):
     is_call = option_type.lower() == "call"
-    from core.black_scholes import call_price, put_price
+    from equations.black_scholes import call_price, put_price
     return {
         "Value":  call_price(S, K, T, r, sigma, q) if is_call else put_price(S, K, T, r, sigma, q),
         "Delta":  delta_call(S, K, T, r, sigma, q) if is_call else delta_put(S, K, T, r, sigma, q),
@@ -141,7 +141,7 @@ def all_vanilla_greeks(S, K, T, r, sigma, q=0.0, option_type="call"):
 
 def all_binary_greeks(S, K, T, r, sigma, q=0.0, option_type="call"):
     is_call = option_type.lower() == "call"
-    from core.black_scholes import binary_call_price, binary_put_price
+    from equations.black_scholes import binary_call_price, binary_put_price
     return {
         "Value":  binary_call_price(S, K, T, r, sigma, q) if is_call else binary_put_price(S, K, T, r, sigma, q),
         "Delta":  binary_delta_call(S, K, T, r, sigma, q) if is_call else binary_delta_put(S, K, T, r, sigma, q),

@@ -1,7 +1,7 @@
 # Implied Volatility
 import numpy as np
-from core.black_scholes import call_price, put_price
-from core.greeks import vega
+from equations.black_scholes import call_price, put_price
+from equations.greeks import vega
 
 
 def implied_vol(

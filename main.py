@@ -1,3 +1,4 @@
+# all the imports
 import argparse
 import os
 import matplotlib
@@ -30,12 +31,9 @@ def main():
     K_range = np.linspace(70, 130, 200)
     S_range = np.linspace(70, 130, 200)
 
-    plot_greeks_vs_strike(S0, K_range, T0, r0, sigma0, q0, "call",
-                          save_path=f"{args.output}/greeks_vs_strike_call.png")
-    plot_greeks_vs_strike(S0, K_range, T0, r0, sigma0, q0, "put",
-                          save_path=f"{args.output}/greeks_vs_strike_put.png")
-    plot_greeks_vs_spot(S_range, K0, T0, r0, sigma0, q0, "call",
-                        save_path=f"{args.output}/greeks_vs_spot_call.png")
+    plot_greeks_vs_strike(S0, K_range, T0, r0, sigma0, q0, "call", save_path=f"{args.output}/greeks_vs_strike_call.png")
+    plot_greeks_vs_strike(S0, K_range, T0, r0, sigma0, q0, "put", save_path=f"{args.output}/greeks_vs_strike_put.png")
+    plot_greeks_vs_spot(S_range, K0, T0, r0, sigma0, q0, "call", save_path=f"{args.output}/greeks_vs_spot_call.png")
     print("  \u2713 Theoretical plots saved.")
 
     if args.skip_live:
@@ -80,7 +78,7 @@ def main():
 
     plt.close("all")
     print(f"\n{'=' * 65}")
-    print(f"DONE — outputs in ./{args.output}/")
+    print(f"SAVED — outputs in ./{args.output}/")
     print(f"{'=' * 65}")
 
 

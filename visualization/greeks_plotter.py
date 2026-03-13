@@ -1,9 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from core.greeks import (
-    delta_call, delta_put, gamma, vega,
-    theta_call, theta_put, rho_call, rho_put, speed,
-)
+from equations.greeks import (delta_call, delta_put, gamma, vega, theta_call, theta_put, rho_call, rho_put, speed)
 
 
 def plot_greeks_vs_strike(S, K_range, T, r, sigma, q=0.0, option_type="call", save_path=None):

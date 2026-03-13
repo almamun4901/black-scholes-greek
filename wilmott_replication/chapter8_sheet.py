@@ -1,24 +1,10 @@
-"""
-Wilmott Chapter 8 spreadsheet replication.
-
-Reproduces the exact content of all sheets:
-  Sheet 1: Contents (info only)
-  Sheet 2: Spreadsheet functions / VB functions reference
-  Sheet 3: Greeks — vanilla + binary call/put with all 8 Greeks
-  Sheet 4: Implied Volatility — Newton-Raphson IV for 5 options
-"""
-
 import numpy as np
 import pandas as pd
-from core.greeks import all_vanilla_greeks, all_binary_greeks
-from core.implied_vol import implied_vol
+from equations.greeks import all_vanilla_greeks, all_binary_greeks
+from equations.implied_vol import implied_vol
 
 
 def replicate_greeks_sheet(S=100, sigma=0.20, q=0.0, r=0.05, K=100, T=1.0):
-    """
-    Reproduce the 'Greeks' sheet exactly.
-    Returns dict with vanilla_call, vanilla_put, binary_call, binary_put.
-    """
     vc = all_vanilla_greeks(S, K, T, r, sigma, q, "call")
     vp = all_vanilla_greeks(S, K, T, r, sigma, q, "put")
     bc = all_binary_greeks(S, K, T, r, sigma, q, "call")
@@ -30,12 +16,7 @@ def replicate_greeks_sheet(S=100, sigma=0.20, q=0.0, r=0.05, K=100, T=1.0):
             "binary_call": bc, "binary_put": bp}
 
 
-def replicate_iv_sheet(S=100, r=0.08, tol=0.001,
-                       market_prices=None, strikes=None, expiries=None):
-    """
-    Reproduce the 'Implied Volatility' sheet exactly.
-    Default values match Wilmott's sheet.
-    """
+def replicate_iv_sheet(S=100, r=0.08, tol=0.001, market_prices=None, strikes=None, expiries=None):
     if market_prices is None:
         market_prices = [18.6, 14.8, 11.5, 8.9, 7.0]
     if strikes is None:
@@ -60,12 +41,11 @@ def replicate_iv_sheet(S=100, r=0.08, tol=0.001,
 
 
 def run_full_replication():
-    """Execute full replication and print results matching Wilmott layout."""
     greeks = replicate_greeks_sheet()
     iv = replicate_iv_sheet()
 
     print("=" * 65)
-    print("WILMOTT CHAPTER 8 — FULL SPREADSHEET REPLICATION")
+    print("SPREADSHEET REPLICATION")
     print("=" * 65)
 
     print("\n── Sheet: Greeks ──")
